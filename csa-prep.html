@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ServiceNow CSA Prep — Didim Digital Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #000000; 
+            color: #ffffff;
+            margin: 0; 
+            height: 100dvh; 
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            padding-top: 60px;
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #050505; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        
+        #root { height: 100%; display: flex; flex-direction: column; }
+        .ui-choice { transition: all 0.1s ease-in-out; }
+        
+        .review-table th {
+            text-transform: uppercase;
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            color: #666;
+            border-bottom: 1px solid #333;
+            padding: 12px 8px;
+            text-align: left;
+        }
+        .review-table td {
+            padding: 12px 8px;
+            border-bottom: 1px solid #111;
+            font-size: 12px;
+        }
+        .review-table tr:hover { background-color: rgba(255, 255, 255, 0.05); cursor: pointer; }
+    </style>
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ── Shared Global Nav ───────────────────────────────────────────── */
+.g-nav{position:sticky;top:0;z-index:9000;background:rgba(255,255,255,.96);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid #e2e8f0;height:60px;display:flex;align-items:center;font-family:'DM Sans',ui-sans-serif,system-ui,sans-serif;}
+.g-nav-inner{max-width:1200px;margin:0 auto;width:100%;padding:0 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.g-logo{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:600;color:#0d1b2e;letter-spacing:-.3px;text-decoration:none;}
+.g-logo-icon{width:34px;height:34px;background:#0d1b2e;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.g-logo-sub{font-size:10px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:#64748b;display:block;margin-top:-2px;}
+.g-nav-links{display:flex;align-items:center;gap:2px;}
+.g-nav-links a{font-size:13px;font-weight:500;color:#334155;padding:6px 10px;border-radius:8px;transition:all .15s;text-decoration:none;white-space:nowrap;}
+.g-nav-links a:hover{color:#0d1b2e;background:#f1f5f9;}
+.g-nav-links a.active{color:#2563eb;background:#eff6ff;}
+.g-nav-cta{background:#0d1b2e!important;color:#fff!important;padding:8px 16px!important;border-radius:8px!important;font-weight:600!important;letter-spacing:-.1px;transition:background .15s!important;}
+.g-nav-cta:hover{background:#1a2d4a!important;}
+.g-pill{font-size:10px;font-weight:700;background:#eff6ff;color:#2563eb;border:1px solid #bfdbfe;border-radius:999px;padding:2px 7px;letter-spacing:.04em;margin-left:4px;vertical-align:middle;}
+.g-pill-live{background:#f0fdf4;color:#15803d;border-color:#86efac;}
+@media(max-width:900px){.g-nav-links{display:none;}}
+/* ─────────────────────────────────────────────────────────────────── */
+</style>
+<header class="g-nav">
+  <div class="g-nav-inner">
+    <a href="/" class="g-logo">
+      <div class="g-logo-icon">
+        <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="5" y="5" width="12" height="24" rx="2" fill="white" opacity=".85"/>
+          <path d="M5 5 C5 5 18 5 22 17 C26 29 18 29 5 29" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          <ellipse cx="17" cy="17" rx="6" ry="9" fill="#3b82f6"/>
+        </svg>
+      </div>
+      <div>
+        <span>Didim Digital</span>
+        <span class="g-logo-sub">AI Product Consulting</span>
+      </div>
+    </a>
+    <nav class="g-nav-links">
+      <a href="/#tools">Tools</a>
+      <a href="/#experience">Experience</a>
+      <a href="/#platforms">Platforms</a>
+      <a href="/#about">About</a>
+      <a href="/csa-prep">CSA Prep</a>
+      <a href="/job-agent">Job Agent <span class="g-pill">AI</span></a>
+      <a href="/pia">PIA <span class="g-pill g-pill-live">LIVE</span></a>
+      <a href="/#contact" class="g-nav-cta">Let's Talk</a>
+    </nav>
+  </div>
+</header>
+    <!-- Didim Digital back nav — always visible, outside React root -->
+    <a href="/" id="dd-back" style="
+        position:fixed;top:0;left:0;z-index:9999;
+        display:inline-flex;align-items:center;gap:6px;
+        padding:8px 12px;
+        background:rgba(0,0,0,0.85);
+        border-bottom:1px solid #222;border-right:1px solid #222;
+        border-bottom-right-radius:8px;
+        font-family:-apple-system,system-ui,sans-serif;
+        font-size:11px;font-weight:600;
+        color:rgba(255,255,255,0.55);
+        text-decoration:none;
+        letter-spacing:.02em;
+        transition:color .15s,background .15s;
+        backdrop-filter:blur(8px);
+        -webkit-backdrop-filter:blur(8px);
+    " onmouseover="this.style.color='#fff';this.style.background='rgba(30,30,30,0.95)'"
+       onmouseout="this.style.color='rgba(255,255,255,0.55)';this.style.background='rgba(0,0,0,0.85)'">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        Didim Digital
+    </a>
+        <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useMemo } = React;
+
+        const ChevronLeft = () => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>;
+        const ChevronRight = () => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>;
+        const Clock = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>;
+        const Flag = ({ fill = "none", color = "currentColor", className = "" }) => <svg width="14" height="14" viewBox="0 0 24 24" fill={fill} stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>;
+
+        /**
+         * MASTER BANK - 60 MANUALLY CURATED UNIQUE SITUATIONAL CSA SCENARIOS
+         * NO TEMPLATES. NO REPETITION.
+         */
+        const MASTER_BANK = [
+            { id: 1, type: "radio", domain: "Security", question: "The HR department needs to restrict the 'Home Address' field on the User record so that only members of the 'HR Admin' group can view it. What is the mandatory first step in the security evaluation path to ensure this works?", options: ["Ensure Table-level read access (the 'Front Door') is granted before checking field-level rules.", "Create a field-level ACL for the Home Address field immediately.", "Add the 'hr_basic' role to the system-wide Read ACL.", "Configure a UI Policy to hide the field for all other roles."], correctIndices: [0], rationale: "Table access must be granted before individual field security is evaluated. If the 'front door' is locked, the field check never occurs." },
+            { id: 2, type: "radio", domain: "Automation", question: "A group manager wants employees to order a laptop, headset, and mouse as a single bundle using one form that asks for their 'Shipping Location' once. Which Service Catalog tool should be used?", options: ["Record Producer", "Variable Set", "Order Guide", "Content Item"], correctIndices: [2], rationale: "Order Guides bundle multiple catalog items into a single request and can cascade variables across them." },
+            { id: 3, type: "checkbox", needed: 2, domain: "Security", question: "An organization wants to restrict access to a Knowledge Base so that only employees in 'Engineering' can read articles. Which two methods are standard to achieve this? (Select 2)", options: ["User Criteria", "Access Control Rules (ACLs)", "UI Policies", "Client Scripts"], correctIndices: [0, 1], rationale: "User Criteria manages access at the Knowledge Base container level; ACLs manage security at the individual record level." },
+            { id: 4, type: "radio", domain: "Database", question: "An administrator is importing assets. They want to ensure that if a record with the same 'Serial Number' already exists, it is updated instead of duplicated. Which feature is used?", options: ["Auto-Mapping Assist", "Identification Rule", "Coalesce", "Scripted Mapping"], correctIndices: [2], rationale: "Coalescing matches unique attributes to determine if an incoming record should be updated or inserted." },
+            { id: 5, type: "radio", domain: "UI", question: "A fulfiller wants to see all active Incidents where they are either the 'Caller' OR the 'Assigned To' person. What is the most efficient way to build this list?", options: ["Use the Filter Builder with an 'OR' condition.", "Create two separate browser bookmarks.", "Use a Database View.", "Request a custom UI Action."], correctIndices: [0], rationale: "The Filter Builder allows for complex AND/OR logic to view specific record subsets." },
+            { id: 6, type: "radio", domain: "Security", question: "Which system role is designed to prevent all users, including administrators, from viewing specific confidential records?", options: ["security_admin", "maint", "nobody", "internal_reviewer"], correctIndices: [2], rationale: "The 'nobody' role is an absolute block for all users, including administrators." },
+            { id: 7, type: "radio", domain: "UI", question: "Which keyboard shortcut focuses the Global Search bar in the Next Experience interface?", options: ["G", "S", "/", "F"], correctIndices: [2], rationale: "The forward slash (/) focuses the Global Search bar in Next Experience." },
+            { id: 8, type: "radio", domain: "UI", question: "What occurs when an administrator types 'stats.do' into the Filter Navigator and presses Enter?", options: ["The instance is rebooted.", "Technical information about the current node and version is displayed.", "The license usage report is shown.", "A new incident record is created."], correctIndices: [1], rationale: "stats.do provides internal system details including build version and processing node." },
+            { id: 9, type: "radio", domain: "Migration", question: "A developer has made changes to a Business Rule in Dev. What is the mandatory next step to move these changes to Test after retrieving the Update Set?", options: ["Commit the Update Set immediately.", "Preview the Update Set to check for conflicts.", "Export the XML directly.", "Bypass preview."], correctIndices: [1], rationale: "Previewing identifies configuration collisions before committing." },
+            { id: 10, type: "radio", domain: "Database", question: "Which tool provides a graphical representation of the table inheritance hierarchy for the Task table and its descendants?", options: ["Dependency Views", "Dictionary Entry", "Table Manager", "Schema Map"], correctIndices: [3], rationale: "The Schema Map visualizes the database structure, showing how tables relate and extend one another." },
+            { id: 11, type: "radio", domain: "Security", question: "A user is assigned a role through group membership. If they are removed from the group, what happens to that role?", options: ["They keep the role manually.", "The role is automatically removed.", "The role stays until log out.", "The user is deactivated."], correctIndices: [1], rationale: "Inheritance roles are automatically revoked when the group membership ends." },
+            { id: 12, type: "radio", domain: "Database", question: "Which table stores the actual Choice options for a field like 'Incident State' or 'Priority'?", options: ["sys_dictionary", "sys_metadata", "sys_choice", "sys_db_object"], correctIndices: [2], rationale: "Individual choice options are housed in the [sys_choice] table." },
+            { id: 13, type: "radio", domain: "Automation", question: "Which tool allows agents to follow a multi-stage guided process for complex cases like 'Employee Onboarding'?", options: ["Flow Designer", "Playbooks", "Workflow Editor", "UI Builder"], correctIndices: [1], rationale: "Playbooks guide users through multi-stage business processes in Workspace." },
+            { id: 14, type: "radio", domain: "Security", question: "Where is session elevation to 'security_admin' performed in the Next Experience interface?", options: ["User Menu in the banner", "System Properties", "The sys_user record", "Access Control module"], correctIndices: [0], rationale: "Elevation is manually toggled per session via the User Menu in the header." },
+            { id: 15, type: "radio", domain: "Database", question: "An organization sees that SCCM discovery is overwriting manual location updates in the CMDB. Which feature should they configure to prevent this?", options: ["Data Policy", "Reconciliation Rules", "Field Normalization", "Identification Rules"], correctIndices: [1], rationale: "Reconciliation Rules define which data sources take precedence for specific CI attributes." },
+            { id: 16, type: "radio", domain: "UI", question: "What does the 'Yellow' indicator signify next to a field in a list view during an inline edit?", options: ["Mandatory field", "Read-only field", "Unsaved change", "System error"], correctIndices: [2], rationale: "Yellow indicates a value was changed in the UI but not yet saved to the database." },
+            { id: 17, type: "checkbox", needed: 2, domain: "Reporting", question: "A manager wants to receive a PDF of the 'Overdue Incidents' report every Monday at 8:00 AM. Which two components are required for this? (Select 2)", options: ["Scheduled Report", "Export Set", "Email Notification", "Report Distribution Group"], correctIndices: [0, 3], rationale: "Scheduled Reports handle the automation of sending report snapshots via email to specific groups." },
+            { id: 18, type: "radio", domain: "Database", question: "Which CSDM 4.0 attribute tracks the current production state of a Configuration Item?", options: ["Status", "Operational State", "Lifecycle Stage", "Hardware Status"], correctIndices: [2], rationale: "Lifecycle Stage is the standard state attribute in modern CSDM versions." },
+            { id: 19, type: "radio", domain: "Automation", question: "An order guide variable needs to be passed to child catalog items. What must be checked in the Order Guide configuration?", options: ["Include variables", "Cascade Variables", "Share data", "Propagate"], correctIndices: [1], rationale: "Cascade Variables allows values to pass down from the guide to items." },
+            { id: 20, type: "radio", domain: "Security", question: "An organization wants to ensure specific confidential notes are only visible to the 'Management' group. Which part of the ACL prevents 'admin' from bypassing the rule?", options: ["Condition", "Script", "Admin Override (Unchecked)", "Role"], correctIndices: [2], rationale: "Unchecking Admin Override forces even administrators to meet the criteria defined." },
+            { id: 21, type: "radio", domain: "Database", question: "Which blueprint organizes services into Design, Manage, and Technical layers?", options: ["ITIL v4", "TOGAF", "CSDM 4.0", "SNAF"], correctIndices: [2], rationale: "CSDM 4.0 is the service-aware data model standard." },
+            { id: 22, type: "radio", domain: "Automation", question: "Which Business Rule type runs immediately when a user clicks 'Save' but before data is committed to the database?", options: ["Before", "After", "Async", "Display"], correctIndices: [0], rationale: "Before rules run prior to database commit." },
+            { id: 23, type: "radio", domain: "Database", question: "Which table stores technical definitions and metadata for every column across all tables?", options: ["sys_db_object", "sys_dictionary", "sys_metadata", "sys_storage"], correctIndices: [1], rationale: "sys_dictionary holds the primary metadata for fields." },
+            { id: 24, type: "radio", domain: "Migration", question: "Which data type is NOT captured by an Update Set automatically?", options: ["Business Rules", "Client Scripts", "User records", "UI Policies"], correctIndices: [2], rationale: "Update Sets capture configuration, not transactional data like User records." },
+            { id: 25, type: "radio", domain: "Security", question: "Which privilege is required to manage the 'security_admin' role assignment?", options: ["admin", "maint", "security_admin", "user_admin"], correctIndices: [2], rationale: "Only security_admins can manage that elevated role." },
+            { id: 26, type: "radio", domain: "Automation", question: "A Knowledge article reaches its 'Valid To' date. What is its state?", options: ["Deleted", "Archived/Expired", "Draft", "Active"], correctIndices: [1], rationale: "Articles move to Expired when the Valid To date passes." },
+            { id: 27, type: "radio", domain: "Reporting", question: "Which feature allows an administrator to see metric changes over time beyond simple snapshots?", options: ["Pivot Tables", "Scheduled Reports", "Performance Analytics", "Database Views"], correctIndices: [2], rationale: "PA tracks indicators over time to identify trends." },
+            { id: 28, type: "radio", domain: "UI", question: "What UI element displays the active filter conditions applied to a list?", options: ["Header", "Status Bar", "Breadcrumbs", "Navigator"], correctIndices: [2], rationale: "Breadcrumbs provide a visual map of the active list filters." },
+            { id: 29, type: "radio", domain: "Security", question: "Which system role allows an admin to switch their perspective exactly as another user for visibility testing?", options: ["Impersonator", "Search As", "Access Debugger", "User Criteria Preview"], correctIndices: [0], rationale: "Impersonation allows admins to see exactly what a user sees." },
+            { id: 30, type: "radio", domain: "Automation", question: "In Flow Designer, a developer needs to use a value from a previous 'Look Up Record' action. How should they pass this data?", options: ["Write a script include.", "Drag and drop the 'Data Pill'.", "Copy the Sys ID manually.", "Use a Scratchpad variable."], correctIndices: [1], rationale: "Data Pills store dynamic values for use in subsequent actions." },
+            { id: 31, type: "radio", domain: "Database", question: "Which Identification rule ensures discovery sources do not overwrite manual CI entries?", options: ["Identification Engine", "Reconciliation Rule", "Data Policy", "Transform Map"], correctIndices: [1], rationale: "Reconciliation Rules determine data source precedence." },
+            { id: 32, type: "radio", domain: "Migration", question: "What is the mandatory step to identify conflicts before committing an Update Set?", options: ["Retrieve", "Commit", "Preview", "Import"], correctIndices: [2], rationale: "Previewing detects collisions before committing." },
+            { id: 33, type: "radio", domain: "Database", question: "Which health metric identifies CIs that have not been updated in over 60 days?", options: ["Compliance", "Staleness", "Completeness", "Accuracy"], correctIndices: [1], rationale: "Staleness identifies outdated CI records." },
+            { id: 34, type: "radio", domain: "UI", question: "What icon restores the persistent navigation sidebar if it was unpinned?", options: ["Star", "Clock", "Pin", "All Menu"], correctIndices: [2], rationale: "The Pin icon toggles persistent state." },
+            { id: 35, type: "radio", domain: "Reporting", question: "Which reporting tool joins unrelated tables for visualization?", options: ["Pivot Table", "Database View", "Scheduled Report", "Metric Explorer"], correctIndices: [1], rationale: "Database Views act as virtual SQL joins." },
+            { id: 36, type: "radio", domain: "Automation", question: "Which Flow Designer feature allows you to re-use a sequence of actions in different flows?", options: ["Action", "Subflow", "Trigger", "Data Pill"], correctIndices: [1], rationale: "Subflows are modular sequences of actions designed for reuse." },
+            { id: 37, type: "radio", domain: "Database", question: "Which table stores field label documentation and help text?", options: ["sys_dictionary", "sys_metadata", "sys_documentation", "sys_choice"], correctIndices: [2], rationale: "sys_documentation stores field labels and hints." },
+            { id: 38, type: "radio", domain: "Automation", question: "A catalog variable needs to be displayed across multiple items. Which component is used?", options: ["Variable Set", "Record Producer", "Order Guide", "Content Item"], correctIndices: [0], rationale: "Variable Sets enable modular reuse across the catalog." },
+            { id: 39, type: "radio", domain: "Security", question: "What happens if a user is removed from a group that provides a specific role?", options: ["They keep the role.", "The role is automatically revoked.", "The role stays until log out.", "The user is deactivated."], correctIndices: [1], rationale: "Inherited roles are revoked when group membership ends." },
+            { id: 40, type: "radio", domain: "Migration", question: "Where is raw data stored before transformation in an import set?", options: ["Target Table", "Import Map", "Staging Table", "Cache"], correctIndices: [2], rationale: "Imports land in staging tables first." },
+            
+            // --- ADVANCED MODULES (CI, SCHEMA, REPORTING) ---
+            { id: 41, type: "radio", domain: "CMDB", question: "Which table serves as the root base class for all Configuration Items (CIs)?", options: ["cmdb_ci", "cmdb", "task", "sys_db_object"], correctIndices: [0], rationale: "cmdb_ci is the specific base class for CIs." },
+            { id: 42, type: "radio", domain: "Database", question: "Which tool provides a graphical map of table relationships and inherited fields?", options: ["Dependency Views", "Schema Map", "Dictionary Entry", "Tables & Columns"], correctIndices: [1], rationale: "The Schema Map visualizes database structure metadata." },
+            { id: 43, type: "radio", domain: "Database", question: "How do you make a field mandatory only on a specific child table?", options: ["Dictionary Override", "UI Policy", "Data Policy", "Client Script"], correctIndices: [0], rationale: "Dictionary Overrides vary field attributes from the parent definition." },
+            { id: 44, type: "radio", domain: "CMDB", question: "Which tool shows components impacted by a database outage?", options: ["Schema Map", "Dependency Views", "CI Class Manager", "Business Service Map"], correctIndices: [1], rationale: "Dependency Views visualize upstream/downstream impact." },
+            { id: 45, type: "radio", domain: "Reporting", question: "Which feature automates report distribution at 7:00 AM every morning?", options: ["Notification Policy", "Scheduled Report", "PA Dashboard", "Export Set"], correctIndices: [1], rationale: "Scheduled Reports automate interval distribution." },
+            { id: 46, type: "radio", domain: "Migration", question: "A developer updates an ACL in an Update Set. What is moved to Production?", options: ["The Metadata record", "The User record", "The ACL and all related data", "The entire Table"], correctIndices: [0], rationale: "Update Sets capture metadata (logic), not transactional data." },
+            { id: 47, type: "radio", domain: "Catalog", question: "What is the most efficient way to add 'Location' variables to 20 catalog items?", options: ["Variable Set", "Container Split", "Order Guide", "Record Producer"], correctIndices: [0], rationale: "Variable Sets enable modular reuse." },
+            { id: 48, type: "radio", domain: "Security", question: "Which diagnostic tool identifies the exact ACL rule responsible for access denial?", options: ["Script Tracer", "ACL Debugger", "Script Debugger", "ATF"], correctIndices: [1], rationale: "The ACL Debugger troubleshoots security rules." },
+            { id: 49, type: "radio", domain: "CMDB", question: "Which health metric identifies CIs with missing mandatory data?", options: ["Correctness", "Compliance", "Completeness", "Accuracy"], correctIndices: [2], rationale: "Completeness tracks mandatory field population." },
+            { id: 50, type: "radio", domain: "Security", question: "Which part of an ACL prevents admins from bypassing the rule?", options: ["Condition", "Script", "Admin Override (Unchecked)", "Role"], correctIndices: [2], rationale: "Unchecking Admin Override forces admins to pass rule criteria." },
+            { id: 51, type: "radio", domain: "UI", question: "Which navigation menu tracks the last 30 items you visited?", options: ["All", "Favorites", "History", "Tools"], correctIndices: [2], rationale: "History tracks recently visited records." },
+            { id: 52, type: "radio", domain: "Database", question: "Which CSDM domain represents infrastructure like Servers and Routers?", options: ["Design", "Foundation", "Technical Service", "Manageability"], correctIndices: [2], rationale: "Technical Service domain houses technical infrastructure." },
+            { id: 53, type: "radio", domain: "Automation", question: "What object accesses the record currently being processed in a script?", options: ["source", "previous", "current", "record"], correctIndices: [2], rationale: "'current' represents the active record." },
+            { id: 54, type: "radio", domain: "UI", question: "Which shortcut focuses the Global Search bar in Next Experience?", options: ["G", "S", "/", "F"], correctIndices: [2], rationale: "Forward slash (/) focuses Global Search." },
+            { id: 55, type: "radio", domain: "UI", question: "What shortcut focuses the Filter Navigator?", options: ["Ctrl + Alt + N", "Ctrl + Alt + G", "Ctrl + Alt + F", "Shift + Alt + G"], correctIndices: [1], rationale: "Ctrl + Alt + G focuses the Filter Navigator." },
+            { id: 56, type: "radio", domain: "Security", question: "Which role allows viewing the instance as another user?", options: ["impersonator", "admin", "itil", "security_admin"], correctIndices: [0], rationale: "impersonator allows perspective switching." },
+            { id: 57, type: "radio", domain: "Flow", question: "What are the variables used to pass data between actions in a Flow?", options: ["Parameters", "Flow Tokens", "Data Pills", "State Variables"], correctIndices: [2], rationale: "Data Pills carry dynamic values between steps." },
+            { id: 58, type: "radio", domain: "Database", question: "Which Identification rule ensures discovery sources don't overwrite manual CI data?", options: ["Identification Engine", "Reconciliation Rule", "Data Policy", "Transform Map"], correctIndices: [1], rationale: "Reconciliation Rules determine precedence." },
+            { id: 59, type: "radio", domain: "Reporting", question: "Where do you configure fields displayed for dot-walking in a report?", options: ["Form Layout", "List Control", "Dictionary Entry", "User Preference"], correctIndices: [2], rationale: "Dictionary defines properties for dot-walking." },
+            { id: 60, type: "radio", domain: "UI", question: "A user wants to change their personal time zone. Where do they go?", options: ["User Preferences", "System Properties", "My Profile", "User Menu > Preferences"], correctIndices: [3], rationale: "The Preferences menu allows individual locale adjustments." }
+        ];
+
+        function shuffle(array) {
+            let currentIndex = array.length, randomIndex;
+            const newArray = [...array];
+            while (currentIndex !== 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [newArray[currentIndex], newArray[randomIndex]] = [newArray[randomIndex], newArray[currentIndex]];
+            }
+            return newArray;
+        }
+
+        function App() {
+            const [view, setView] = useState('intro');
+            const [globalIndex, setGlobalIndex] = useState(0); 
+            const [answers, setAnswers] = useState({}); 
+            const [marked, setMarked] = useState(new Set());
+            const [time, setTime] = useState(5400); 
+            const [showRationale, setShowRationale] = useState(false);
+
+            const examDeck = useMemo(() => {
+                const deck = shuffle(MASTER_BANK).slice(0, 60);
+                return deck.map(q => {
+                    const optionsWithMapping = q.options.map((opt, i) => ({ text: opt, isCorrect: q.correctIndices.includes(i) }));
+                    const shuffledOpts = shuffle(optionsWithMapping);
+                    const newCorrectIndices = shuffledOpts.map((opt, i) => opt.isCorrect ? i : -1).filter(i => i !== -1);
+                    return { ...q, options: shuffledOpts.map(o => o.text), correctIndices: newCorrectIndices };
+                });
+            }, []);
+
+            useEffect(() => {
+                let timer;
+                if ((view === 'exam' || view === 'review') && time > 0) timer = setInterval(() => setTime(t => t - 1), 1000);
+                return () => clearInterval(timer);
+            }, [view, time]);
+
+            const currentQ = examDeck[globalIndex];
+            const selections = currentQ ? (answers[currentQ.id] || []) : [];
+
+            const handleChoice = (idx) => {
+                if (showRationale) return;
+                if (currentQ.type === 'radio') {
+                    setAnswers({ ...answers, [currentQ.id]: [idx] });
+                } else {
+                    if (selections.includes(idx)) {
+                        setAnswers({ ...answers, [currentQ.id]: selections.filter(i => i !== idx) });
+                    } else if (selections.length < (currentQ.needed || 1)) {
+                        setAnswers({ ...answers, [currentQ.id]: [...selections, idx] });
+                    }
+                }
+            };
+
+            const toggleFlag = () => {
+                const n = new Set(marked);
+                if (n.has(currentQ.id)) n.delete(currentQ.id); 
+                else n.add(currentQ.id);
+                setMarked(n);
+            };
+
+            const handleNext = () => {
+                if (!showRationale) {
+                    if (selections.length === 0) return;
+                    setShowRationale(true);
+                } else {
+                    setShowRationale(false);
+                    if (globalIndex < 59) setGlobalIndex(i => i + 1);
+                    else setView('review');
+                }
+            };
+
+            const handleSkip = () => {
+                setShowRationale(false);
+                if (globalIndex < 59) setGlobalIndex(i => i + 1);
+                else setView('review');
+            };
+
+            const handleJump = (idx) => {
+                setShowRationale(false);
+                setGlobalIndex(idx);
+                setView('exam');
+            };
+
+            const isCorrect = (ans, correct) => {
+                if (!ans || ans.length !== correct.length) return false;
+                return ans.every(v => correct.includes(v));
+            };
+
+            const formatTime = (s) => {
+                const m = Math.floor(s / 60);
+                const secs = s % 60;
+                return `${m}:${secs < 10 ? '0' : ''}${secs}`;
+            };
+
+            if (view === 'intro') {
+                return (
+                    <div className="bg-black h-screen w-screen text-white flex flex-col items-center justify-center p-6 antialiased text-center">
+                        <div className="max-w-xl w-full border border-gray-800 bg-[#0a0a0a] p-10 rounded-sm shadow-2xl">
+                            <h1 className="text-xl font-black tracking-tight border-b border-gray-800 pb-2 mb-6 uppercase italic underline decoration-blue-500">ServiceNow CSA Prep</h1>
+                            <p className="text-gray-400 text-sm leading-relaxed mb-8 text-[12px] uppercase tracking-widest">Fixed Zero-Filler Deck (60 Unique items). Randomized Choices. Review and Flag Features Restored.</p>
+                            <button onClick={() => setView('exam')} className="w-full py-4 bg-white text-black font-black uppercase tracking-widest text-xs hover:bg-gray-200 active:scale-95 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)]">Authenticate & Start</button>
+                        </div>
+                    </div>
+                );
+            }
+
+            if (view === 'review') {
+                return (
+                    <div className="bg-black h-[100dvh] w-screen text-white flex flex-col antialiased overflow-hidden">
+                        <header className="bg-black border-b border-gray-700 px-4 py-3 flex justify-between items-center shrink-0">
+                            <h2 className="text-[10px] font-black uppercase tracking-widest text-gray-400 font-mono">Exam Summary Review</h2>
+                        </header>
+                        <main className="flex-1 overflow-y-auto bg-[#080808] p-4 sm:p-8 custom-scrollbar">
+                            <div className="max-w-4xl w-full mx-auto">
+                                <table className="w-full review-table border-collapse">
+                                    <thead>
+                                        <tr>
+                                            <th className="text-center w-16">Item</th>
+                                            <th className="text-left">Status</th>
+                                            <th className="text-center w-24">Marked</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {examDeck.map((q, idx) => (
+                                            <tr key={idx} onClick={() => handleJump(idx)}>
+                                                <td className="text-center font-bold text-gray-400">{idx + 1}</td>
+                                                <td>{answers[q.id] ? <span className="text-green-500 font-bold">Answered</span> : <span className="text-red-500 italic">Unanswered</span>}</td>
+                                                <td className="text-center">{marked.has(q.id) && <Flag fill="orange" color="orange" className="inline" />}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </main>
+                        <footer className="bg-black border-t border-gray-700 p-6 flex justify-center shrink-0">
+                            <button onClick={() => setView('results')} className="px-12 py-3 bg-blue-600 text-white font-black uppercase text-[10px] tracking-widest hover:bg-blue-500 shadow-xl">Finish Practice Session</button>
+                        </footer>
+                    </div>
+                );
+            }
+
+            if (view === 'results') {
+                const incorrects = examDeck.filter(q => !isCorrect(answers[q.id], q.correctIndices));
+                const percent = (((60 - incorrects.length) / 60) * 100).toFixed(0);
+                return (
+                    <div className="bg-black h-screen w-screen text-white flex flex-col antialiased overflow-hidden">
+                        <header className="bg-black border-b border-gray-700 px-4 py-3 flex justify-between items-center">
+                            <h2 className="text-[10px] font-black uppercase text-gray-400">Score Report Breakdown</h2>
+                            <button onClick={() => window.location.reload()} className="text-[8px] font-black border border-white px-3 py-1.5 uppercase hover:bg-white hover:text-black transition-all">Restart</button>
+                        </header>
+                        <main className="flex-1 overflow-y-auto p-4 sm:p-8 bg-[#080808] custom-scrollbar">
+                            <div className="max-w-4xl mx-auto pb-20">
+                                <div className="bg-[#111] border border-gray-800 p-12 mb-10 rounded-sm text-center">
+                                    <div className={`text-7xl font-black mb-4 ${parseInt(percent) >= 75 ? 'text-green-500' : 'text-red-500'}`}>{percent}%</div>
+                                    <p className="text-xs text-gray-500 uppercase font-bold tracking-widest">{parseInt(percent) >= 75 ? 'READY FOR CERTIFICATION' : 'NEEDS ADDITIONAL STUDY'}</p>
+                                </div>
+                                <h3 className="text-xl font-black uppercase mb-8 border-b border-gray-800 pb-2">Review Incorrect Items ({incorrects.length})</h3>
+                                {incorrects.map((q, i) => (
+                                    <div key={i} className="border border-red-900 bg-red-950/10 p-6 rounded-sm mb-6 shadow-xl">
+                                        <div className="text-[9px] font-black uppercase text-red-500 mb-2">{q.domain}</div>
+                                        <p className="text-sm font-medium mb-4 text-white leading-relaxed">{q.question}</p>
+                                        <div className="text-xs text-green-400 mb-4 bg-black/50 p-4 border border-gray-800 rounded-sm">
+                                            <span className="text-white font-black uppercase underline mr-1 text-[10px]">Correct Answer:</span> {q.correctIndices.map(idx => q.options[idx]).join(", ")}
+                                        </div>
+                                        <p className="text-[11px] text-gray-300 italic leading-relaxed"><span className="text-white font-black not-italic uppercase underline mr-1 font-sans">Rationale:</span> {q.rationale}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </main>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="bg-black h-[100dvh] w-screen text-white flex flex-col antialiased select-none overflow-hidden">
+                    <header className="bg-black border-b border-gray-700 px-4 py-3 flex justify-between items-center shrink-0">
+                        <div className="flex flex-col">
+                            <span className="text-[10px] font-black uppercase tracking-widest text-white underline decoration-blue-500">Pearson VUE Aligned</span>
+                            <span className="text-[10px] font-bold text-gray-400 font-mono italic">Item {globalIndex + 1} of 60</span>
+                        </div>
+                        <div className="flex items-center gap-6 font-mono text-sm tracking-widest text-gray-300">
+                            <div className="flex items-center gap-2 border border-gray-700 px-3 py-1 bg-black"><Clock /> {formatTime(time)}</div>
+                            <button onClick={() => setView('review')} className="text-[8px] font-black border border-white px-3 py-1.5 uppercase hover:bg-white hover:text-black">Review Screen</button>
+                        </div>
+                    </header>
+                    
+                    <main className="flex-1 flex flex-col p-4 sm:p-16 overflow-y-auto bg-[#080808] custom-scrollbar">
+                        <div className="max-w-3xl w-full mx-auto flex-1">
+                            <div className="flex justify-end items-start mb-8">
+                                <button onClick={toggleFlag} className={`text-[8px] flex items-center gap-2 font-black px-3 py-1.5 border transition-all ${marked.has(currentQ.id) ? 'bg-orange-500 border-orange-500 text-white shadow-[0_0_15px_rgba(255,165,0,0.4)]' : 'text-gray-400 border-gray-700 hover:border-gray-400'}`}>
+                                    <Flag fill={marked.has(currentQ.id) ? "orange" : "none"} color={marked.has(currentQ.id) ? "white" : "currentColor"} className="w-3 h-3" /> {marked.has(currentQ.id) ? 'MARKED' : 'FLAG ITEM'}
+                                </button>
+                            </div>
+                            
+                            <h3 className="text-[14px] sm:text-[18px] font-normal leading-relaxed mb-10 tracking-tight text-white border-b border-gray-800 pb-8">{currentQ.question}</h3>
+                            
+                            <div className="space-y-3 mb-10">
+                                {currentQ.options.map((option, idx) => {
+                                    const isSelected = selections.includes(idx);
+                                    let borderStyle = "border-gray-800 hover:border-gray-600";
+                                    if (showRationale) {
+                                        if (currentQ.correctIndices.includes(idx)) borderStyle = "border-green-500 bg-green-500/10";
+                                        else if (isSelected) borderStyle = "border-red-500 bg-red-500/10";
+                                    } else if (isSelected) borderStyle = "border-blue-500 bg-blue-500/5";
+
+                                    return (
+                                        <div key={idx} onClick={() => handleChoice(idx)} className={`group flex items-center gap-4 p-4 border-2 transition-all cursor-pointer rounded-sm ${borderStyle}`}>
+                                            <div className={`w-4 h-4 border-2 flex items-center justify-center ${isSelected ? 'border-white bg-blue-500' : 'border-gray-600'} ${currentQ.type === 'radio' ? 'rounded-full' : 'rounded-none'}`}>
+                                                {isSelected && <div className="bg-white w-1.5 h-1.5 rounded-full" />}
+                                            </div>
+                                            <span className="text-[12px] sm:text-[13px] font-medium">{option}</span>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                            {showRationale && (
+                                <div className="p-6 bg-[#0c0c0c] border-l-4 border-blue-500 rounded-sm mb-12 shadow-xl animate-in fade-in slide-in-from-top-4 duration-300">
+                                    <div className="text-[10px] font-black uppercase text-blue-500 mb-2 font-mono tracking-widest font-bold underline">Technical Rationale</div>
+                                    <p className="text-xs text-gray-300 italic">{currentQ.rationale}</p>
+                                </div>
+                            )}
+                        </div>
+                    </main>
+
+                    <footer className="bg-black border-t border-gray-700 p-6 flex justify-between items-center shrink-0">
+                        <button disabled={globalIndex === 0} onClick={() => { setShowRationale(false); setGlobalIndex(i => i - 1); }} className="flex items-center gap-1.5 px-6 py-3 font-black uppercase text-[9px] border border-gray-600 hover:border-white disabled:opacity-10 transition-all active:scale-95"><ChevronLeft /> Previous</button>
+                        
+                        <div className="hidden md:flex gap-1 max-w-[25%] overflow-x-auto p-1 custom-scrollbar items-center">
+                            {examDeck.map((q, i) => (
+                                <div key={i} onClick={() => handleJump(i)} 
+                                    className={`cursor-pointer flex-shrink-0 w-1.5 h-1.5 rounded-none transition-all ${i === globalIndex ? 'bg-white scale-150 ring-2 ring-white/20' : marked.has(q.id) ? 'bg-orange-500 shadow-[0_0_8px_rgba(255,165,0,0.5)]' : answers[q.id] ? 'bg-gray-600' : 'bg-[#222]'}`} 
+                                />
+                            ))}
+                        </div>
+
+                        <div className="flex gap-2">
+                            {!showRationale && (
+                                <button onClick={handleSkip} className="px-8 py-3 font-black uppercase text-[9px] border border-gray-600 text-gray-400 hover:border-white transition-all shadow-inner">Skip</button>
+                            )}
+                            <button onClick={handleNext} className={`flex items-center gap-1.5 px-8 sm:px-12 py-3 font-black uppercase text-[9px] transition-all active:scale-95 ${showRationale ? 'bg-white text-black' : 'bg-blue-600 text-white hover:bg-blue-500 shadow-lg'}`}>
+                                {showRationale ? (globalIndex === 59 ? 'FINISH' : 'NEXT') : 'SUBMIT'} <ChevronRight />
+                            </button>
+                        </div>
+                    </footer>
+                </div>
+            );
+        }
+
+        const root = window.ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

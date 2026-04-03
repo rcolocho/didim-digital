@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Didim Digital — AI Product Consulting · Robin Alexander Colocho</title>
+<meta name="description" content="Building AI-powered digital products that ship. Senior product leader with 16+ years in fintech and financial services. MBA — UCLA Anderson."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --navy:#0d1b2e;--navy2:#142038;--navy3:#1a2d4a;
+  --blue:#1a56db;--blue2:#2563eb;--blue3:#3b82f6;--blue-light:#eff6ff;
+  --teal:#0f766e;--teal-light:#f0fdfa;
+  --green:#15803d;--green-light:#f0fdf4;
+  --gold:#b45309;--gold-light:#fffbeb;
+  --text:#0f172a;--text2:#334155;--text3:#64748b;--text4:#94a3b8;
+  --border:#e2e8f0;--border2:#cbd5e1;
+  --white:#ffffff;--bg:#f8fafc;--bg2:#f1f5f9;
+  --shadow:0 4px 16px rgba(0,0,0,.06),0 1px 4px rgba(0,0,0,.04);
+  --shadow-lg:0 20px 48px rgba(0,0,0,.1),0 4px 12px rgba(0,0,0,.06);
+  --radius:12px;--radius-lg:16px;
+  --font:'DM Sans',sans-serif;--font-display:'Playfair Display',serif;--font-mono:'DM Mono',monospace;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font);background:var(--white);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);height:60px;display:flex;align-items:center;}
+.nav-inner{max-width:1200px;margin:0 auto;width:100%;padding:0 28px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
+.logo{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:600;color:var(--navy);letter-spacing:-.3px;}
+.logo-icon{width:34px;height:34px;background:var(--navy);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.logo-sub{font-size:10px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);display:block;margin-top:-2px;}
+.nav-links{display:flex;align-items:center;gap:2px;}
+.nav-links a{font-size:13px;font-weight:500;color:var(--text2);padding:6px 10px;border-radius:8px;transition:all .15s;}
+.nav-links a:hover{color:var(--navy);background:var(--bg2);}
+.nav-cta{background:var(--navy)!important;color:var(--white)!important;padding:8px 16px!important;border-radius:8px!important;font-weight:600!important;letter-spacing:-.1px;}
+.nav-cta:hover{background:var(--navy3)!important;}
+.nav-pill{font-size:10px;font-weight:700;background:var(--blue-light);color:var(--blue2);border:1px solid #bfdbfe;border-radius:999px;padding:2px 7px;letter-spacing:.04em;margin-left:4px;vertical-align:middle;}
+.nav-pill.live{background:#f0fdf4;color:var(--green);border-color:#86efac;}
+
+/* HERO */
+.hero{background:var(--navy);color:var(--white);padding:80px 0 72px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.04) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;}
+.hero-inner{max-width:1200px;margin:0 auto;padding:0 28px;display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center;}
+.hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--blue3);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.hero-eyebrow::before{content:'';display:block;width:24px;height:2px;background:var(--blue3);border-radius:1px;}
+.hero h1{font-family:var(--font-display);font-size:clamp(36px,4.5vw,54px);font-weight:700;line-height:1.1;letter-spacing:-.5px;color:var(--white);margin-bottom:20px;}
+.hero h1 em{font-style:normal;color:var(--blue3);}
+.hero-lead{font-size:17px;color:rgba(255,255,255,.7);line-height:1.7;max-width:50ch;margin-bottom:32px;}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--blue2);color:var(--white);font-family:var(--font);font-size:14px;font-weight:600;padding:12px 22px;border-radius:10px;border:none;cursor:pointer;transition:all .15s;letter-spacing:-.1px;}
+.btn-primary:hover{background:#1d4ed8;transform:translateY(-1px);box-shadow:0 8px 24px rgba(37,99,235,.4);}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;background:transparent;color:rgba(255,255,255,.8);font-family:var(--font);font-size:14px;font-weight:500;padding:12px 22px;border-radius:10px;border:1px solid rgba(255,255,255,.2);cursor:pointer;transition:all .15s;}
+.btn-outline:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.35);}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);overflow:hidden;margin-top:40px;}
+.hero-stat{padding:18px 16px;background:rgba(255,255,255,.04);}
+.hero-stat .val{font-family:var(--font-display);font-size:26px;font-weight:700;color:var(--white);letter-spacing:-.5px;line-height:1;}
+.hero-stat .lbl{font-size:11px;color:rgba(255,255,255,.45);margin-top:4px;font-weight:500;}
+.hero-right{display:flex;flex-direction:column;gap:10px;}
+.credential-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:14px 16px;display:flex;align-items:center;gap:12px;transition:background .2s;}
+.credential-card:hover{background:rgba(255,255,255,.09);}
+.cred-icon{width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:17px;}
+.cred-title{font-size:13px;font-weight:600;color:var(--white);margin-bottom:1px;}
+.cred-sub{font-size:11px;color:rgba(255,255,255,.45);}
+.cred-years{font-size:10px;font-weight:700;color:var(--blue3);font-family:var(--font-mono);margin-left:auto;flex-shrink:0;}
+
+/* SECTIONS */
+.section{padding:72px 0;}
+.section-inner{max-width:1200px;margin:0 auto;padding:0 28px;}
+.section-label{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--blue2);margin-bottom:8px;}
+.section-title{font-family:var(--font-display);font-size:clamp(26px,3vw,36px);font-weight:700;color:var(--navy);letter-spacing:-.5px;margin-bottom:12px;line-height:1.2;}
+.section-desc{font-size:15px;color:var(--text3);max-width:56ch;line-height:1.7;}
+.section-hd{margin-bottom:40px;}
+
+/* TOOLS */
+.tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.tool-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;transition:all .2s;cursor:pointer;position:relative;overflow:hidden;}
+.tool-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--card-accent,var(--blue2));opacity:0;transition:opacity .2s;}
+.tool-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--border2);}
+.tool-card:hover::after{opacity:1;}
+.tool-badge{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:4px 10px;border-radius:999px;margin-bottom:14px;}
+.tool-name{font-size:17px;font-weight:700;color:var(--navy);margin-bottom:6px;letter-spacing:-.2px;}
+.tool-desc{font-size:13px;color:var(--text3);line-height:1.65;margin-bottom:16px;}
+.tool-stack{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:18px;}
+.tool-tag{font-size:10px;font-weight:600;color:var(--text3);background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:2px 7px;font-family:var(--font-mono);}
+.tool-link{font-size:13px;font-weight:600;color:var(--blue2);display:inline-flex;align-items:center;gap:5px;transition:gap .15s;}
+.tool-link:hover{gap:9px;}
+.tool-card.featured{grid-column:span 2;background:var(--navy);border-color:transparent;}
+.tool-card.featured .tool-name{color:var(--white);}
+.tool-card.featured .tool-desc{color:rgba(255,255,255,.6);}
+.tool-card.featured .tool-tag{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12);color:rgba(255,255,255,.55);}
+.tool-card.featured .tool-link{color:var(--blue3);}
+.live-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:currentColor;margin-right:1px;animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* EXPERIENCE */
+.exp-bg{background:var(--bg);}
+.exp-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.exp-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:flex;gap:14px;align-items:flex-start;transition:box-shadow .2s;}
+.exp-card:hover{box-shadow:var(--shadow);}
+.exp-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:5px;}
+.exp-co{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:2px;}
+.exp-role{font-size:11px;color:var(--text3);margin-bottom:6px;}
+.exp-impact{font-size:12px;color:var(--text2);line-height:1.55;}
+.exp-years{font-size:10px;font-weight:600;color:var(--text4);font-family:var(--font-mono);white-space:nowrap;flex-shrink:0;}
+.exp-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;width:100%;}
+
+/* PLATFORMS */
+.platforms-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;}
+.platform-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:16px 12px;text-align:center;transition:all .2s;}
+.platform-card:hover{background:var(--white);border-color:var(--border2);box-shadow:var(--shadow);}
+.platform-icon{font-size:22px;margin-bottom:8px;}
+.platform-name{font-size:12px;font-weight:600;color:var(--text2);}
+.platform-cap{font-size:10px;color:var(--text4);margin-top:2px;}
+
+/* ABOUT */
+.about-bg{background:var(--navy);color:var(--white);}
+.about-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:64px;align-items:center;}
+.about-label{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--blue3);margin-bottom:12px;}
+.about-title{font-family:var(--font-display);font-size:clamp(26px,3vw,38px);font-weight:700;color:var(--white);letter-spacing:-.5px;margin-bottom:16px;line-height:1.2;}
+.about-body{font-size:15px;color:rgba(255,255,255,.62);line-height:1.75;margin-bottom:20px;}
+.cert-item{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,.7);margin-bottom:8px;}
+.cert-dot{width:5px;height:5px;border-radius:50%;background:var(--blue3);flex-shrink:0;}
+.about-right{display:flex;flex-direction:column;gap:10px;}
+.about-stat-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:18px;}
+.about-stat-val{font-family:var(--font-display);font-size:28px;font-weight:700;color:var(--white);letter-spacing:-.5px;}
+.about-stat-lbl{font-size:12px;color:rgba(255,255,255,.45);margin-top:2px;}
+
+/* CONTACT */
+.contact-bg{background:var(--bg);}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.contact-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:26px;}
+.contact-card h3{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:6px;}
+.contact-card p{font-size:13px;color:var(--text3);line-height:1.6;margin-bottom:16px;}
+.contact-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--blue2);transition:gap .15s;}
+.contact-link:hover{gap:10px;}
+
+/* FOOTER */
+footer{background:var(--navy);padding:28px 0;border-top:1px solid rgba(255,255,255,.06);}
+.footer-inner{max-width:1200px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.4);}
+.footer-copy strong{color:rgba(255,255,255,.7);}
+.footer-sub{font-size:10px;color:rgba(255,255,255,.22);font-family:var(--font-mono);margin-top:3px;}
+.footer-links{display:flex;gap:14px;flex-wrap:wrap;}
+.footer-links a{font-size:12px;color:rgba(255,255,255,.35);transition:color .15s;}
+.footer-links a:hover{color:rgba(255,255,255,.7);}
+
+/* REVEAL */
+.reveal{opacity:1;transform:none;}
+.d1{}.d2{}.d3{}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero-inner,.about-grid{grid-template-columns:1fr;gap:40px;}
+  .hero-right{display:none;}
+  .tools-grid{grid-template-columns:1fr 1fr;}
+  .tool-card.featured{grid-column:span 2;}
+  .exp-grid{grid-template-columns:1fr;}
+  .platforms-grid{grid-template-columns:repeat(3,1fr);}
+  .contact-grid{grid-template-columns:1fr;}
+  .nav-links{display:none;}
+}
+@media(max-width:600px){
+  .tools-grid{grid-template-columns:1fr;}
+  .tool-card.featured{grid-column:span 1;}
+  .hero-stats{grid-template-columns:1fr 1fr;}
+  .platforms-grid{grid-template-columns:repeat(2,1fr);}
+  .exp-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ── Shared Global Nav ───────────────────────────────────────────── */
+.g-nav{position:sticky;top:0;z-index:9000;background:rgba(255,255,255,.96);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid #e2e8f0;height:60px;display:flex;align-items:center;font-family:'DM Sans',ui-sans-serif,system-ui,sans-serif;}
+.g-nav-inner{max-width:1200px;margin:0 auto;width:100%;padding:0 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.g-logo{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:600;color:#0d1b2e;letter-spacing:-.3px;text-decoration:none;}
+.g-logo-icon{width:34px;height:34px;background:#0d1b2e;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.g-logo-sub{font-size:10px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:#64748b;display:block;margin-top:-2px;}
+.g-nav-links{display:flex;align-items:center;gap:2px;}
+.g-nav-links a{font-size:13px;font-weight:500;color:#334155;padding:6px 10px;border-radius:8px;transition:all .15s;text-decoration:none;white-space:nowrap;}
+.g-nav-links a:hover{color:#0d1b2e;background:#f1f5f9;}
+.g-nav-links a.active{color:#2563eb;background:#eff6ff;}
+.g-nav-cta{background:#0d1b2e!important;color:#fff!important;padding:8px 16px!important;border-radius:8px!important;font-weight:600!important;letter-spacing:-.1px;transition:background .15s!important;}
+.g-nav-cta:hover{background:#1a2d4a!important;}
+.g-pill{font-size:10px;font-weight:700;background:#eff6ff;color:#2563eb;border:1px solid #bfdbfe;border-radius:999px;padding:2px 7px;letter-spacing:.04em;margin-left:4px;vertical-align:middle;}
+.g-pill-live{background:#f0fdf4;color:#15803d;border-color:#86efac;}
+@media(max-width:900px){.g-nav-links{display:none;}}
+/* ─────────────────────────────────────────────────────────────────── */
+</style>
+<header class="g-nav">
+  <div class="g-nav-inner">
+    <a href="/" class="g-logo">
+      <div class="g-logo-icon">
+        <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="5" y="5" width="12" height="24" rx="2" fill="white" opacity=".85"/>
+          <path d="M5 5 C5 5 18 5 22 17 C26 29 18 29 5 29" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          <ellipse cx="17" cy="17" rx="6" ry="9" fill="#3b82f6"/>
+        </svg>
+      </div>
+      <div>
+        <span>Didim Digital</span>
+        <span class="g-logo-sub">AI Product Consulting</span>
+      </div>
+    </a>
+    <nav class="g-nav-links">
+      <a href="/#tools">Tools</a>
+      <a href="/#experience">Experience</a>
+      <a href="/#platforms">Platforms</a>
+      <a href="/#about">About</a>
+      <a href="/csa-prep">CSA Prep</a>
+      <a href="/job-agent">Job Agent <span class="g-pill">AI</span></a>
+      <a href="/pia">PIA <span class="g-pill g-pill-live">LIVE</span></a>
+      <a href="/#contact" class="g-nav-cta">Let's Talk</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">Robin Alexander Colocho · AI Product Consulting</div>
+      <h1>Building <em>AI-powered</em><br/>digital products<br/>that ship.</h1>
+      <p class="hero-lead">Senior product leader with 16+ years in fintech and financial services. From concept to live infrastructure — brokerage platforms, wealth management systems, AI agents, and enterprise integrations at Morgan Stanley, Capital Group, and MUFG. MBA — UCLA Anderson.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+          Let's talk
+        </a>
+        <a href="#tools" class="btn-outline">See live demos →</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="val">16+</div><div class="lbl">Years in fintech &amp; enterprise</div></div>
+        <div class="hero-stat"><div class="val">$1B+</div><div class="lbl">AUM impact across platforms</div></div>
+        <div class="hero-stat"><div class="val">0→1</div><div class="lbl">Products shipped at scale</div></div>
+      </div>
+    </div>
+    <div class="hero-right reveal">
+      <div class="credential-card"><div class="cred-icon" style="background:rgba(59,130,246,.15);">🎓</div><div><div class="cred-title">MBA — UCLA Anderson</div><div class="cred-sub">Anderson School of Management</div></div><div class="cred-years">UCLA</div></div>
+      <div class="credential-card"><div class="cred-icon" style="background:rgba(16,185,129,.12);">🏦</div><div><div class="cred-title">Morgan Stanley</div><div class="cred-sub">Digital PM · Brokerage · 220K clients · $450M AUM</div></div><div class="cred-years">2018–20</div></div>
+      <div class="credential-card"><div class="cred-icon" style="background:rgba(245,158,11,.12);">📈</div><div><div class="cred-title">Capital Group</div><div class="cred-sub">Senior Strategic PM · $1B+ AUM · ETF Marketplace</div></div><div class="cred-years">2021–23</div></div>
+      <div class="credential-card"><div class="cred-icon" style="background:rgba(99,102,241,.12);">🏛</div><div><div class="cred-title">MUFG Union Bank</div><div class="cred-sub">VP Product Manager · Wealth Management</div></div><div class="cred-years">2020–21</div></div>
+      <div class="credential-card"><div class="cred-icon" style="background:rgba(239,68,68,.12);">🤖</div><div><div class="cred-title">A.S. Artificial Intelligence</div><div class="cred-sub">Mira Costa College · In Progress 2025</div></div><div class="cred-years">AI</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="section" id="tools">
+  <div class="section-inner">
+    <div class="section-hd reveal">
+      <div class="section-label">Live Demos</div>
+      <h2 class="section-title">AI products built and shipped</h2>
+      <p class="section-desc">Every tool below is live on real infrastructure, powered by Claude API and Cloudflare Workers. Not mockups — working products you can use right now.</p>
+    </div>
+    <div class="tools-grid">
+
+      <div class="tool-card featured reveal" style="--card-accent:#3b82f6;" onclick="window.location.href='pia'">
+        <div class="tool-badge" style="background:rgba(59,130,246,.15);color:#93c5fd;border:1px solid rgba(59,130,246,.25);">
+          <span class="live-dot" style="color:#4ade80;"></span>LIVE · Personal Investment Agent
+        </div>
+        <div class="tool-name">PIA — AI Trading Agent</div>
+        <div class="tool-desc">An autonomous investment agent that reads a plain-English thesis, analyzes current market conditions via Claude API, and executes trades through Alpaca Markets every Monday at 9:45am ET. Full trade log with Claude's plain-English reasoning for every decision. Paper and live modes. Built in one session.</div>
+        <div class="tool-stack">
+          <span class="tool-tag">Claude API</span><span class="tool-tag">Cloudflare Workers</span><span class="tool-tag">Alpaca Markets</span><span class="tool-tag">KV Storage</span><span class="tool-tag">Cron Trigger</span>
+        </div>
+        <a class="tool-link" href="/pia">Open live dashboard →</a>
+      </div>
+
+      <div class="tool-card reveal d1" style="--card-accent:#0f766e;" onclick="window.open('https://solenetec.com','_blank')">
+        <div class="tool-badge" style="background:#f0fdfa;color:#0f766e;border:1px solid #99f6e4;"><span class="live-dot" style="color:#0f766e;"></span>LIVE · solenetec.com</div>
+        <div class="tool-name">Solen AI — Clean Energy Advisor</div>
+        <div class="tool-desc">Bilingual EN/ES AI chat agent advising homeowners on solar, battery, EV charging, and IRA incentives. Auto-creates HubSpot contacts on lead capture. $0.005/session via Cloudflare Worker.</div>
+        <div class="tool-stack"><span class="tool-tag">Claude API</span><span class="tool-tag">Cloudflare</span><span class="tool-tag">HubSpot</span><span class="tool-tag">Calendly</span></div>
+        <a class="tool-link" href="https://solenetec.com" target="_blank">Visit solenetec.com →</a>
+      </div>
+
+      <div class="tool-card reveal d1" style="--card-accent:#15803d;" onclick="window.location.href='job-agent'">
+        <div class="tool-badge" style="background:#f0fdf4;color:#15803d;border:1px solid #86efac;"><span class="live-dot" style="color:#15803d;"></span>LIVE · Job Agent</div>
+        <div class="tool-name">Job Agent — AI Resume Builder</div>
+        <div class="tool-desc">Conversational resume builder that scores multiple resume versions against a JD, identifies gaps, and generates tailored .docx downloads — with file upload, history vault, and Claude-powered conversation.</div>
+        <div class="tool-stack"><span class="tool-tag">Claude API</span><span class="tool-tag">docx.js</span><span class="tool-tag">mammoth.js</span><span class="tool-tag">PDF.js</span></div>
+        <a class="tool-link" href="/job-agent">Launch Job Agent →</a>
+      </div>
+
+      <div class="tool-card reveal d2" style="--card-accent:#7c3aed;" onclick="window.location.href='csa-prep.html'">
+        <div class="tool-badge" style="background:#f5f3ff;color:#7c3aed;border:1px solid #ddd6fe;"><span class="live-dot" style="color:#7c3aed;"></span>LIVE · ServiceNow</div>
+        <div class="tool-name">CSA Exam Prep Simulator</div>
+        <div class="tool-desc">Adaptive ServiceNow Certified System Administrator exam simulator with topic filtering, progress tracking, and timed practice mode. Built as a React app, deployed as a single HTML file.</div>
+        <div class="tool-stack"><span class="tool-tag">React</span><span class="tool-tag">ServiceNow CSA</span><span class="tool-tag">Adaptive Logic</span></div>
+        <a class="tool-link" href="/csa-prep">Launch CSA Prep →</a>
+      </div>
+
+      <div class="tool-card reveal d3" style="--card-accent:#13a564;" onclick="window.location.href='#contact'">
+        <div class="tool-badge" style="background:#f0fdf4;color:#13a564;border:1px solid #86efac;">Platform Expertise</div>
+        <div class="tool-name">ServiceNow Consulting</div>
+        <div class="tool-desc">ITSM implementations, CMDB design, Service Catalog, Flow Designer, and AI-assisted workflow automation. ServiceNow CSA certified. Available for scoped engagements and team enablement.</div>
+        <div class="tool-stack"><span class="tool-tag">ITSM</span><span class="tool-tag">CMDB</span><span class="tool-tag">Flow Designer</span><span class="tool-tag">Now Assist AI</span></div>
+        <a class="tool-link" href="#contact">Discuss a project →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section exp-bg" id="experience">
+  <div class="section-inner">
+    <div class="section-hd reveal">
+      <div class="section-label">Background</div>
+      <h2 class="section-title">Senior product leadership in fintech</h2>
+      <p class="section-desc">16+ years owning product lifecycles at major financial institutions — not just managing, building.</p>
+    </div>
+    <div class="exp-grid">
+      <div class="exp-card reveal"><div class="exp-dot" style="background:#b45309;"></div><div style="flex:1;"><div class="exp-top"><div><div class="exp-co">Morgan Stanley</div><div class="exp-role">Digital Product Manager — Self-Directed Brokerage</div></div><div class="exp-years">2018–2020</div></div><div class="exp-impact">0→1 brokerage platform — 220K new clients, $450M AUM year one. Launched KYC/AML digital flow that improved account open rates from 34% to 74%.</div></div></div>
+      <div class="exp-card reveal d1"><div class="exp-dot" style="background:#2563eb;"></div><div style="flex:1;"><div class="exp-top"><div><div class="exp-co">Capital Group</div><div class="exp-role">Senior Strategic PM · Team Lead</div></div><div class="exp-years">2021–2023</div></div><div class="exp-impact">Active ETF Marketplace 0→1 — 12 product launches, $1B+ AUM. Built NLP chatbot automating 50% of inbound inquiries. Led teams across LA, NY, London, Geneva.</div></div></div>
+      <div class="exp-card reveal"><div class="exp-dot" style="background:#0f766e;"></div><div style="flex:1;"><div class="exp-top"><div><div class="exp-co">MUFG Union Bank</div><div class="exp-role">VP Product Manager · Team Lead</div></div><div class="exp-years">2020–2021</div></div><div class="exp-impact">Roadmap supporting $500M projected AUM growth. Robo-advisory REST API integration drove 25% enrollment growth. Redesigned KYC with Plaid/Akoya — onboarding time cut 45%.</div></div></div>
+      <div class="exp-card reveal d1"><div class="exp-dot" style="background:#15803d;"></div><div style="flex:1;"><div class="exp-top"><div><div class="exp-co">City National Bank</div><div class="exp-role">AVP PM — Digital Platforms</div></div><div class="exp-years">2015–2017</div></div><div class="exp-impact">Replaced fragmented iFrame banking with unified API-first platform — 81K new client acquisitions, 20% CSAT improvement. Launched mobile wallets, NFC, P2P.</div></div></div>
+      <div class="exp-card reveal" style="grid-column:span 2;"><div class="exp-dot" style="background:#7c3aed;"></div><div style="flex:1;"><div class="exp-top"><div><div class="exp-co">Insurance Company of the West</div><div class="exp-role">Senior Technical PM · Pod Manager</div></div><div class="exp-years">2024–2025</div></div><div class="exp-impact">AI-powered quote engine reduced time-to-quote 65%. Scoped GenAI autonomous agent projecting $1.5M annual savings. Embedded Stripe and Venmo — 40% digital payment adoption.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORMS -->
+<section class="section" id="platforms">
+  <div class="section-inner">
+    <div class="section-hd reveal">
+      <div class="section-label">Technology</div>
+      <h2 class="section-title">Platforms built on</h2>
+      <p class="section-desc">Enterprise platforms, AI infrastructure, CRM, and cloud — hands-on experience, not just project oversight.</p>
+    </div>
+    <div class="platforms-grid">
+      <div class="platform-card reveal"><div class="platform-icon">🤖</div><div class="platform-name">Claude API</div><div class="platform-cap">AI / LLM</div></div>
+      <div class="platform-card reveal d1"><div class="platform-icon">⚡</div><div class="platform-name">Cloudflare</div><div class="platform-cap">Workers / KV / CDN</div></div>
+      <div class="platform-card reveal d2"><div class="platform-icon">🟢</div><div class="platform-name">ServiceNow</div><div class="platform-cap">ITSM · CSA Certified</div></div>
+      <div class="platform-card reveal d3"><div class="platform-icon">☁️</div><div class="platform-name">Salesforce</div><div class="platform-cap">CRM / FSC / RevOps</div></div>
+      <div class="platform-card reveal d1"><div class="platform-icon">📊</div><div class="platform-name">Tableau</div><div class="platform-cap">Analytics / BI</div></div>
+      <div class="platform-card reveal d2"><div class="platform-icon">💳</div><div class="platform-name">Alpaca / Stripe</div><div class="platform-cap">Brokerage / Payments</div></div>
+      <div class="platform-card reveal"><div class="platform-icon">🔗</div><div class="platform-name">HubSpot</div><div class="platform-cap">CRM / Marketing</div></div>
+      <div class="platform-card reveal d1"><div class="platform-icon">🌊</div><div class="platform-name">MuleSoft</div><div class="platform-cap">API / iPaaS</div></div>
+      <div class="platform-card reveal d2"><div class="platform-icon">❄️</div><div class="platform-name">Snowflake</div><div class="platform-cap">Data / Analytics</div></div>
+      <div class="platform-card reveal d3"><div class="platform-icon">☁️</div><div class="platform-name">AWS</div><div class="platform-cap">Cloud / S3 / Lambda</div></div>
+      <div class="platform-card reveal"><div class="platform-icon">🏦</div><div class="platform-name">Plaid / Akoya</div><div class="platform-cap">Open Banking / KYC</div></div>
+      <div class="platform-card reveal d1"><div class="platform-icon">📋</div><div class="platform-name">SAFe / Scrum</div><div class="platform-cap">CSM · SAFe 6 Agilist</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section about-bg" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="about-label">About Robin Colocho</div>
+        <h2 class="about-title">Senior product leader who builds things himself.</h2>
+        <p class="about-body">Most PMs hand specs to engineers. I've spent the last two years building and deploying the products I design — a live AI investment agent, a bilingual clean energy advisor, an AI resume builder, and a ServiceNow exam simulator. Everything on this site is live on real infrastructure.</p>
+        <p class="about-body">My background spans Morgan Stanley, Capital Group, MUFG Union Bank, and City National Bank — building brokerage platforms, wealth management systems, and digital banking products that scaled to hundreds of thousands of customers and billions in AUM.</p>
+        <div>
+          <div class="cert-item"><div class="cert-dot"></div>MBA — UCLA Anderson School of Management</div>
+          <div class="cert-item"><div class="cert-dot"></div>B.A. — University of California, Berkeley</div>
+          <div class="cert-item"><div class="cert-dot"></div>A.S. Artificial Intelligence — Mira Costa College (In Progress)</div>
+          <div class="cert-item"><div class="cert-dot"></div>Certified Scrum Master (CSM) — Scrum Alliance</div>
+          <div class="cert-item"><div class="cert-dot"></div>SAFe 6 Agilist — SAFe Studio (2025)</div>
+          <div class="cert-item"><div class="cert-dot"></div>ServiceNow Certified System Administrator (CSA)</div>
+        </div>
+      </div>
+      <div class="about-right reveal d1">
+        <div class="about-stat-card"><div class="about-stat-val">$1B+</div><div class="about-stat-lbl">AUM impact across fintech platforms</div></div>
+        <div class="about-stat-card"><div class="about-stat-val">220K</div><div class="about-stat-lbl">New brokerage clients — Morgan Stanley 0→1</div></div>
+        <div class="about-stat-card"><div class="about-stat-val">5</div><div class="about-stat-lbl">Live AI products deployed and running</div></div>
+        <div class="about-stat-card"><div class="about-stat-val">$0.005</div><div class="about-stat-lbl">Per AI session — Solenetec production cost</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact-bg" id="contact">
+  <div class="section-inner">
+    <div class="section-hd reveal">
+      <div class="section-label">Work Together</div>
+      <h2 class="section-title">Let's build something real.</h2>
+      <p class="section-desc">Available for product consulting, AI integration projects, and senior PM engagements in fintech and financial services.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card reveal"><h3>📅 Book a call</h3><p>Quick 30-minute intro — tell me about what you're building or the role you're hiring for. I'll tell you how I can help.</p><a class="contact-link" href="https://calendly.com" target="_blank">Book on Calendly →</a></div>
+      <div class="contact-card reveal d1"><h3>✉️ Email directly</h3><p>For project inquiries, consulting engagements, or recruiter outreach. Best for sharing detailed requirements or JDs.</p><a class="contact-link" href="/cdn-cgi/l/email-protection#4f3d2c2023202c27200f28222e2623612c2022"><span class="__cf_email__" data-cfemail="7a08191516151912153a1d171b131654191517">[email&#160;protected]</span> →</a></div>
+      <div class="contact-card reveal"><h3>💼 LinkedIn</h3><p>Full work history, recommendations, and portfolio posts. Best way to see the full career arc from Capital Group to present.</p><a class="contact-link" href="https://linkedin.com/in/rcolocho" target="_blank">linkedin.com/in/rcolocho →</a></div>
+      <div class="contact-card reveal d1"><h3>🌐 Solenetec</h3><p>See the Solen AI chat agent in action — the bilingual EN/ES consumer advisory platform built on Claude API and Cloudflare Workers.</p><a class="contact-link" href="https://solenetec.com" target="_blank">solenetec.com →</a></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-copy"><strong>© <span id="yr"></span> Didim Digital</strong> · Robin Alexander Colocho · Oceanside, CA</div>
+      <div class="footer-sub">AI Product Consulting · Built on Claude API · Cloudflare Workers · Hostinger</div>
+    </div>
+    <div class="footer-links">
+      <a href="#tools">Tools</a>
+      <a href="#experience">Experience</a>
+      <a href="/csa-prep">CSA Prep</a>
+      <a href="/job-agent">Job Agent</a>
+      <a href="/pia">PIA</a>
+      <a href="https://solenetec.com" target="_blank">Solenetec</a>
+      <a href="/cdn-cgi/l/email-protection#780a1b1714171b1017381f15191114561b1715">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+document.getElementById('yr').textContent = new Date().getFullYear()
